@@ -19,25 +19,16 @@ function getComputerChoice () {
     return computerChoice;
 }
 
-function getHumanChoice () {
-    let input = prompt("What is your final decision?");
-    let humanChoice = input.toLowerCase();
-
-    if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
-        console.log("valid input");
-    }  else {
-        console.log("invalid input")
-        getHumanChoice();
-    }
-
+function getHumanChoice (event) {
+    const humanChoice = event.target;
     return humanChoice;
 }
 
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound (humanChoice, computerChoice) {
-    humanChoice = getHumanChoice ();
+function playRound (event) {
+    humanChoice = getHumanChoice (event);
     computerChoice = getComputerChoice ();
 
     if (humanChoice === computerChoice) {
@@ -73,12 +64,9 @@ function playRound (humanChoice, computerChoice) {
 let humanSelection;
 let computerSelection;
 
+/* code that runs the whole game, not just individual rounds */
+
 function playGame () {
-    playRound (humanSelection, computerSelection);
-    playRound (humanSelection, computerSelection);
-    playRound (humanSelection, computerSelection);
-    playRound (humanSelection, computerSelection);
-    playRound (humanSelection, computerSelection);
 
     if (humanScore < computerScore) {
         console.log("Game Over! You lose.");
@@ -91,5 +79,20 @@ function playGame () {
         }
 }
 
-playGame ();
 
+
+const rock = document.createElement("button");
+const paper = document.createElement("button");
+const scissors = document.createElement("button");
+
+rock.textContent = "Rock";
+paper.textContent = "Paper";
+scissors.textContent = "Scissors";
+
+rock.addEventListener("click", playRound);
+paper.addEventListener("click", playRound);
+scissors.addEventListener("click", playRound);
+
+body.appendChild(rock);
+body.appendChild(paper);
+body.appendChild(scissors);
