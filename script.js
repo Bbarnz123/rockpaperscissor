@@ -20,7 +20,8 @@ function getComputerChoice () {
 }
 
 function getHumanChoice (event) {
-    const humanChoice = event.target;
+    let humanChoice = event.target.textContent;
+    humanChoice = humanChoice.toLowerCase();
     return humanChoice;
 }
 
@@ -84,6 +85,8 @@ function playGame () {
 const rock = document.createElement("button");
 const paper = document.createElement("button");
 const scissors = document.createElement("button");
+
+const body = document.querySelector("body");
 
 rock.textContent = "Rock";
 paper.textContent = "Paper";
