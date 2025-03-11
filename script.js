@@ -32,34 +32,39 @@ function playRound (event) {
     humanChoice = getHumanChoice (event);
     computerChoice = getComputerChoice ();
 
-    if (humanChoice === computerChoice) {
-        console.log("Draw!");
-    }   
-        else if (humanChoice === "rock" && computerChoice === "paper") {
-            console.log("You lose! The opponent played " + computerChoice);
-            computerScore += 1;
-        }
-        else if (humanChoice === "rock" && computerChoice === "scissors") {
-            console.log("You win! The opponent played " + computerChoice);
-            humanScore += 1;
-        }
-        else if (humanChoice === "paper" && computerChoice === "rock") {
-            console.log("You win! The opponent played " + computerChoice);
-            humanScore += 1;
-        }
-        else if (humanChoice === "paper" && computerChoice === "scissors") {
-            console.log("You lose! The opponent played " + computerChoice);
-            computerScore += 1;
-        }
-        else if (humanChoice === "scissors" && computerChoice === "rock") {
-            console.log("You lose! The opponent played " + computerChoice);
-            computerScore += 1;
-        }
-        else {
-            console.log("You win! The opponent played " + computerChoice);
-            humanScore += 1;
-        }
+    if (humanScore === 5 || computerScore === 5) {
+        displayWinner();
+    }
 
+    if (humanScore != 5 && computerScore != 5) {
+        if (humanChoice === computerChoice) {
+            result.textContent = "Draw! " + "\n Your Points: " + humanScore + "\n Computer Points: " + computerScore;
+        }   
+            else if (humanChoice === "rock" && computerChoice === "paper") {
+                result.textContent = "You lose! The opponent played " + computerChoice + "\n Your Points: " + humanScore + "\n Computer Points: " + computerScore;
+                computerScore += 1;
+            }
+            else if (humanChoice === "rock" && computerChoice === "scissors") {
+                result.textContent = "You win! The opponent played " + computerChoice + "\n Your Points: " + humanScore + "\n Computer Points: " + computerScore;
+                humanScore += 1;
+            }
+            else if (humanChoice === "paper" && computerChoice === "rock") {
+                result.textContent = "You win! The opponent played " + computerChoice + "\n Your Points: " + humanScore + "\n Computer Points: " + computerScore;
+                humanScore += 1;
+            }
+            else if (humanChoice === "paper" && computerChoice === "scissors") {
+                result.textContent = "You lose! The opponent played " + computerChoice + "\n Your Points: " + humanScore + "\n Computer Points: " + computerScore;
+                computerScore += 1;
+            }
+            else if (humanChoice === "scissors" && computerChoice === "rock") {
+                result.textContent = "You lose! The opponent played " + computerChoice + "\n Your Points: " + humanScore + "\n Computer Points: " + computerScore;
+                computerScore += 1;
+            }
+            else {
+                result.textContent = "You win! The opponent played " + computerChoice + "\n Your Points: " + humanScore + "\n Computer Points: " + computerScore;
+                humanScore += 1;
+            }
+        }
 }
 
 let humanSelection;
@@ -67,16 +72,15 @@ let computerSelection;
 
 /* code that runs the whole game, not just individual rounds */
 
-function playGame () {
-
+function displayWinner () {
     if (humanScore < computerScore) {
-        console.log("Game Over! You lose.");
+        result.textContent = "Game Over! You lose.";
     }
         else if (humanScore > computerScore) {
-            console.log("That's a W.")
+            result.textContent = "That's a W.";
         }
         else {
-            console.log("It looks like a draw.")
+            result.textContent = "It looks like a draw.";
         }
 }
 
@@ -99,3 +103,8 @@ scissors.addEventListener("click", playRound);
 body.appendChild(rock);
 body.appendChild(paper);
 body.appendChild(scissors);
+
+const result = document.createElement("div");
+result.style.whiteSpace = "pre-line";
+body.appendChild(result);
+
